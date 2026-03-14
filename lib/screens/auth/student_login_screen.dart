@@ -52,8 +52,14 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
       if (mounted) Navigator.pushReplacementNamed(context, '/student_home');
     } else {
       if (mounted) {
+        final errorMessage = FirebaseService().lastError ?? 'Invalid Credentials or User does not exist';
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Invalid Credentials or User does not exist')),
+          SnackBar(
+            content: Text(errorMessage),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
         );
       }
     }

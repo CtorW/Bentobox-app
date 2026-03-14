@@ -39,14 +39,20 @@ class _OwnerCreateAccountScreenState extends State<OwnerCreateAccountScreen> {
     );
 
     // Hide loading indicator
-    if (mounted) Navigator.pop(context);
+    if (mounted) Navigator.of(context, rootNavigator: true).maybePop();
 
     if (result != null) {
       if (mounted) Navigator.pushReplacementNamed(context, '/owner_home');
     } else {
       if (mounted) {
+        final errorMessage = FirebaseService().lastError ?? 'Registration failed. Please try again.';
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Registration failed. Please try again.')),
+          SnackBar(
+            content: Text(errorMessage),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
         );
       }
     }

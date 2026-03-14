@@ -10,6 +10,8 @@ class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  String? lastError;
+
   // Observable state
   final _stateController = StreamController<Map<String, dynamic>>.broadcast();
   Stream<Map<String, dynamic>> get stateStream => _stateController.stream;
@@ -24,6 +26,7 @@ class FirebaseService {
 
   Future<UserCredential?> login(String email, String password) async {
     try {
+      lastError = null;
       final credential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
@@ -31,6 +34,7 @@ class FirebaseService {
       _notify();
       return credential;
     } catch (e) {
+      lastError = e.toString();
       print('Login error: $e');
       return null;
     }
@@ -45,6 +49,7 @@ class FirebaseService {
     String? studentId,
   }) async {
     try {
+      lastError = null;
       final credential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
@@ -65,6 +70,7 @@ class FirebaseService {
       _notify();
       return credential;
     } catch (e) {
+      lastError = e.toString();
       print('Signup error: $e');
       return null;
     }

@@ -27,6 +27,9 @@ class _FoodSelectionScreenState extends State<FoodSelectionScreen> {
                   return StreamBuilder<List<Map<String, dynamic>>>(
                     stream: FirebaseService().getFoodItems(),
                     builder: (context, foodSnapshot) {
+                      if (foodSnapshot.hasError) {
+                        return Center(child: Text('Error: ${foodSnapshot.error}'));
+                      }
                       if (foodSnapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
                       }
@@ -349,7 +352,7 @@ class _FoodSelectionScreenState extends State<FoodSelectionScreen> {
 
   Widget _buildFoodItem(BuildContext context, Map<String, dynamic> item) {
     final String title = item['title'];
-    final double price = item['price'];
+    final double price = (item['price'] as num).toDouble();
     final String networkImage = item['networkImage'] ?? '';
 
     return Container(

@@ -98,16 +98,19 @@ class _StudentCreateAccountScreenState extends State<StudentCreateAccountScreen>
     );
 
     // Hide loading indicator
-    if (mounted) Navigator.pop(context);
+    if (mounted) Navigator.of(context, rootNavigator: true).maybePop();
 
     if (result != null) {
       if (mounted) Navigator.pushReplacementNamed(context, '/student_home');
     } else {
       if (mounted) {
+        final errorMessage = FirebaseService().lastError ?? 'Account creation failed. Please try again.';
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Account creation failed. Please try again.'),
+            content: Text(errorMessage),
             backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
         );
       }

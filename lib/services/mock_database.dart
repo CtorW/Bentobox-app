@@ -68,7 +68,7 @@ class MockDatabase {
   List<Map<String, dynamic>> get cart => _cart;
 
   int get cartItemCount => _cart.fold(0, (sum, item) => sum + (item['quantity'] as int));
-  double get cartTotal => _cart.fold(0.0, (sum, item) => sum + (item['price'] as double) * (item['quantity'] as int));
+  double get cartTotal => _cart.fold(0.0, (sum, item) => sum + ((item['price'] as num).toDouble()) * (item['quantity'] as int));
 
   final List<Map<String, dynamic>> _orders = [];
   List<Map<String, dynamic>> get orders => _orders;

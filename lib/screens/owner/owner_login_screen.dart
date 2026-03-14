@@ -43,8 +43,14 @@ class _OwnerLoginScreenState extends State<OwnerLoginScreen> {
       if (mounted) Navigator.pushReplacementNamed(context, '/owner_home');
     } else {
       if (mounted) {
+        final errorMessage = FirebaseService().lastError ?? 'Invalid Owner Credentials';
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Invalid Owner Credentials')),
+          SnackBar(
+            content: Text(errorMessage),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
         );
       }
     }

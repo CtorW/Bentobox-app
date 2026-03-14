@@ -32,6 +32,9 @@ class _StoreOwnerInventoryScreenState extends State<StoreOwnerInventoryScreen> {
         child: StreamBuilder<List<Map<String, dynamic>>>(
           stream: FirebaseService().getFoodItems(),
           builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            }
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             }

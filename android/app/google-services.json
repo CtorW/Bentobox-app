@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "406883132362",
+    "project_id": "bentobox-1d1aa",
+    "storage_bucket": "bentobox-1d1aa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406883132362:android:33e1eae3e0d094d1312533",
+        "android_client_info": {
+          "package_name": "com.example.canteen_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5KaXJp6cveFPab2GUoB-yVNkwAZAlHS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
